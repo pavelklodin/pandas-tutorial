@@ -1,0 +1,5 @@
+region,product,sales_count,total_revenue,average_revenue
+EU,A,3,2300,766.67
+EU,B,2,2300,1150.0
+US,A,2,1500,750.0
+US,B,1,1100,1100.0
