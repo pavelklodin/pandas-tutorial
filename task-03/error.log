@@ -1,0 +1,87 @@
+Traceback (most recent call last):
+  File "c:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-03\sales_analysis.py", line 192, in <module>
+    main()
+    ~~~~^^
+  File "c:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-03\sales_analysis.py", line 173, in main
+    aggregated_by_group_df = aggregate_by_group(joined_df)
+  File "c:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-03\sales_analysis.py", line 87, in aggregate_by_group
+    result = joined_df.groupby(["region", "category"], as_index=False).agg(
+        orders_count=("order_id", "count"),
+    ...<2 lines>...
+        total_profit=("profit", "sum")
+    )
+  File "C:\Users\pavel\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\groupby\generic.py", line 2291, in aggregate
+    result = op.agg()
+  File "C:\Users\pavel\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\apply.py", line 294, in agg
+    return self.agg_dict_like()
+           ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\pavel\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\apply.py", line 511, in agg_dict_like
+    return self.agg_or_apply_dict_like(op_name="agg")
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\pavel\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\apply.py", line 1677, in agg_or_apply_dict_like
+    result_index, result_data = self.compute_dict_like(
+                                ~~~~~~~~~~~~~~~~~~~~~~^
+        op_name, selected_obj, selection, kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\pavel\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\apply.py", line 550, in compute_dict_like
+    func = self.normalize_dictlike_arg(op_name, selected_obj, func)
+  File "C:\Users\pavel\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\apply.py", line 762, in normalize_dictlike_arg
+    raise KeyError(f"Label(s) {list(cols)} do not exist")
+KeyError: "Label(s) ['cost', 'profit', 'revenue'] do not exist"
+
+Traceback (most recent call last):
+  File "c:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-03\sales_analysis.py", line 198, in <module>
+    main()
+    ~~~~^^
+  File "c:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-03\sales_analysis.py", line 180, in main
+    aggregated_totals_df = aggregate_totals(joined_df)
+                           ^^^^^^^^^^^^^^^^
+NameError: name 'aggregate_totals' is not defined
+
+Traceback (most recent call last):
+  File "c:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-03\sales_analysis.py", line 198, in <module>
+    main()
+    ~~~~^^
+  File "c:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-03\sales_analysis.py", line 180, in main
+    aggregated_totals_df = aggregate_totals(joined_df)
+                           ^^^^^^^^^^^^^^^^
+NameError: name 'aggregate_totals' is not defined
+
+Traceback (most recent call last):
+  File "c:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-03\sales_analysis.py", line 198, in <module>
+    main()
+    ~~~~^^
+  File "c:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-03\sales_analysis.py", line 180, in main
+    aggregated_totals_df = aggregate_totals(joined_df)
+                           ^^^^^^^^^^^^^^^^
+NameError: name 'aggregate_totals' is not defined
+
+Traceback (most recent call last):
+  File "C:\Users\pavel\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\indexes\base.py", line 3641, in get_loc
+    return self._engine.get_loc(casted_key)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "pandas/_libs/index.pyx", line 168, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 197, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7668, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7676, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'revenue'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-03\sales_analysis.py", line 226, in <module>
+    main()
+    ~~~~^^
+  File "c:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-03\sales_analysis.py", line 208, in main
+    aggregated_totals_df = aggregate_totals(joined_df)
+  File "c:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-03\sales_analysis.py", line 116, in aggregate_totals
+    "total_revenue": [joined_df["revenue"].sum()],
+                      ~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\pavel\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\frame.py", line 4378, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "C:\Users\pavel\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\indexes\base.py", line 3648, in get_loc
+    raise KeyError(key) from err
+KeyError: 'revenue'
+
