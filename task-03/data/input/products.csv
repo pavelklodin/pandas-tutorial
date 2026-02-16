@@ -1,0 +1,4 @@
+product_id,product_name,category,unit_cost
+101,Widget A,Hardware,8
+102,Widget B,Hardware,6
+103,Service C,Services,12

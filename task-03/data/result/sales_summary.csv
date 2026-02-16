@@ -1,0 +1,7 @@
+region,category,orders_count,total_revenue,total_cost,total_profit,profit_margin
+ALL,ALL,6,855,302.0,553.0,0.65
+APAC,Services,1,180,72.0,108.0,0.6
+EU,Hardware,2,275,110.0,165.0,0.6
+US,Hardware,1,60,24.0,36.0,0.6
+US,Services,1,240,96.0,144.0,0.6
+US,UNKNOWN,1,100,0.0,100.0,1.0
