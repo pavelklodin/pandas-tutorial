@@ -1,0 +1,11 @@
+order_id,region,category,quantity,unit_price
+1,EU,Hardware,2,100
+2,EU,Software,1,200
+3,US,Hardware,3,50
+4,US,Software,2,150
+5,APAC,Hardware,1,120
+6,APAC,Software,2,130
+7,EU,Hardware,0,100
+8,US,Hardware,2,-10
+9,EU,Services,1,180
+10,US,Services,2,110
