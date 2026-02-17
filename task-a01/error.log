@@ -1,0 +1,25 @@
+Traceback (most recent call last):
+  File "c:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-a01\sales_enrichment_and_pivot.py", line 161, in <module>
+    main()
+    ~~~~^^
+  File "c:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-a01\sales_enrichment_and_pivot.py", line 147, in main
+    aggregated_totals_df = aggregate_totals(pivoted_sales_df)
+  File "c:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-a01\sales_enrichment_and_pivot.py", line 81, in aggregate_totals
+    totals.insert(0, "region", "ALL")  # Add region column with value "ALL"
+    ^^^^^^^^^^^^^
+  File "C:\Users\pavel\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\generic.py", line 6206, in __getattr__
+    return object.__getattribute__(self, name)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AttributeError: 'Series' object has no attribute 'insert'
+
+Traceback (most recent call last):
+  File "c:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-a01\sales_enrichment_and_pivot.py", line 172, in <module>
+    main()
+    ~~~~^^
+  File "c:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-a01\sales_enrichment_and_pivot.py", line 152, in main
+    aggregated_totals_df = aggregate_totals(pivoted_sales_df)
+  File "c:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-a01\sales_enrichment_and_pivot.py", line 85, in aggregate_totals
+    s = pivot_df.sum(numeric_only=True)
+        ^^^^^^^^^^^^
+AttributeError: 'function' object has no attribute 'sum'
+
