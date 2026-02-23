@@ -1,0 +1,68 @@
+Traceback (most recent call last):
+  File "c:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-a02\revenue_analysis.py", line 230, in <module>
+    main()
+    ~~~~^^
+  File "c:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-a02\revenue_analysis.py", line 216, in main
+    grouped_df = group_by_month_and_segment(enriched_df)
+  File "c:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-a02\revenue_analysis.py", line 108, in group_by_month_and_segment
+    grouped_df = grouped_df.sort_values(by=["order_month", "segment"])
+                 ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\pavel\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\groupby\groupby.py", line 1115, in __getattr__
+    raise AttributeError(
+        f"'{type(self).__name__}' object has no attribute '{attr}'"
+    )
+AttributeError: 'DataFrameGroupBy' object has no attribute 'sort_values'
+
+Traceback (most recent call last):
+  File "C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-a02\revenue_analysis.py", line 230, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-a02\revenue_analysis.py", line 216, in main
+    grouped_df = group_by_month_and_segment(enriched_df)
+  File "C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-a02\revenue_analysis.py", line 108, in group_by_month_and_segment
+    grouped_df = grouped_df.sort_values(by=["order_month", "segment"])
+                 ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\pavel\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\groupby\groupby.py", line 1115, in __getattr__
+    raise AttributeError(
+        f"'{type(self).__name__}' object has no attribute '{attr}'"
+    )
+AttributeError: 'DataFrameGroupBy' object has no attribute 'sort_values'
+
+Traceback (most recent call last):
+  File "C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-a02\revenue_analysis.py", line 273, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-a02\revenue_analysis.py", line 263, in main
+    final_result_df = add_monthly_totals(advanced_df)
+  File "C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-a02\revenue_analysis.py", line 148, in add_monthly_totals
+    totals_df = totals_df[grouped_df.columns]
+                ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\pavel\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\frame.py", line 4384, in __getitem__
+    indexer = self.columns._get_indexer_strict(key, "columns")[1]
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\pavel\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\indexes\base.py", line 6302, in _get_indexer_strict
+    self._raise_if_missing(keyarr, indexer, axis_name)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\pavel\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\indexes\base.py", line 6355, in _raise_if_missing
+    raise KeyError(f"{not_found} not in index")
+KeyError: "['index'] not in index"
+
+Traceback (most recent call last):
+  File "c:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-a02\revenue_analysis.py", line 277, in <module>
+    main()
+    ~~~~^^
+  File "c:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-a02\revenue_analysis.py", line 263, in main
+    final_result_df = add_monthly_totals(advanced_df)
+  File "c:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-a02\revenue_analysis.py", line 148, in add_monthly_totals
+    totals_df = totals_df[grouped_df.columns]
+                ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\pavel\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\frame.py", line 4384, in __getitem__
+    indexer = self.columns._get_indexer_strict(key, "columns")[1]
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\pavel\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\indexes\base.py", line 6302, in _get_indexer_strict
+    self._raise_if_missing(keyarr, indexer, axis_name)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\pavel\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\indexes\base.py", line 6355, in _raise_if_missing
+    raise KeyError(f"{not_found} not in index")
+KeyError: "['index'] not in index"
+

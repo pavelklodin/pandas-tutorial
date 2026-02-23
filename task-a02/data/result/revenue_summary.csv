@@ -1,0 +1,12 @@
+order_month,segment,orders_count,customers_count,total_revenue,cumulative_revenue,rolling_avg_revenue
+2024-01,Enterprise,1,1,200,200,200.0
+2024-01,SMB,1,1,200,200,200.0
+2024-01,ALL,2,2,400,400,400.0
+,,,,,,
+2024-02,Enterprise,2,2,600,800,400.0
+2024-02,UNKNOWN,1,1,500,500,500.0
+2024-02,ALL,3,3,1100,1500,750.0
+,,,,,,
+2024-03,UNKNOWN,1,1,240,740,370.0
+2024-03,ALL,1,1,240,1740,580.0
+,,,,,,
