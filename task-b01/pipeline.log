@@ -1,0 +1,486 @@
+2026-03-17 16:51:25 - __main__ - INFO - ============================================================
+2026-03-17 16:51:25 - __main__ - INFO - Starting pipeline run at 2026-03-17 16:51:25
+2026-03-17 16:51:25 - __main__ - INFO - ============================================================
+2026-03-17 16:51:25 - __main__ - INFO - Step 1: Check pre-conditions before running the main data analytic pipeline
+2026-03-17 16:51:25 - __main__ - INFO - Starting check_preconditions
+2026-03-17 16:51:25 - __main__ - INFO - check_preconditions completed successfully in 0.00s
+2026-03-17 16:51:25 - __main__ - INFO - Step 2: Load customers data and validate format
+2026-03-17 16:51:25 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\customers.csv
+2026-03-17 16:51:25 - data_utils - ERROR - load_data failed in 0.00s: Input file not found: C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\customers.csv
+2026-03-17 16:56:19 - __main__ - INFO - ============================================================
+2026-03-17 16:56:19 - __main__ - INFO - Starting pipeline run at 2026-03-17 16:56:19
+2026-03-17 16:56:19 - __main__ - INFO - ============================================================
+2026-03-17 16:56:19 - __main__ - INFO - Step 1: Check pre-conditions before running the main data analytic pipeline
+2026-03-17 16:56:19 - __main__ - INFO - Starting check_preconditions
+2026-03-17 16:56:19 - __main__ - INFO - check_preconditions completed successfully in 0.00s
+2026-03-17 16:56:19 - __main__ - INFO - Step 2: Load customers data and validate format
+2026-03-17 16:56:19 - __main__ - INFO - Step 3: Update customers data if there are updates in the to_process directory
+2026-03-17 16:56:19 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\customers.csv
+2026-03-17 16:56:19 - data_utils - INFO - load_data completed successfully in 0.01s: Loaded 6 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\customers.csv
+2026-03-17 16:56:19 - data_utils - INFO - Starting validate_format with 6 rows
+2026-03-17 16:56:19 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-17 16:57:51 - __main__ - INFO - ============================================================
+2026-03-17 16:57:51 - __main__ - INFO - Starting pipeline run at 2026-03-17 16:57:51
+2026-03-17 16:57:51 - __main__ - INFO - ============================================================
+2026-03-17 16:57:51 - __main__ - INFO - Step 1: Check pre-conditions before running the main data analytic pipeline
+2026-03-17 16:57:51 - __main__ - INFO - Starting check_preconditions
+2026-03-17 16:57:51 - __main__ - INFO - check_preconditions completed successfully in 0.00s
+2026-03-17 16:57:51 - __main__ - INFO - Step 2: Load customers data and validate format
+2026-03-17 16:57:51 - __main__ - INFO - Step 3: Update customers data if there are updates in the to_process directory
+2026-03-17 16:57:51 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\customers.csv
+2026-03-17 16:57:51 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 6 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\customers.csv
+2026-03-17 16:57:51 - data_utils - INFO - Starting validate_format with 6 rows
+2026-03-17 16:57:51 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-17 16:57:51 - data_utils - INFO - Starting save_summary to C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\customers_temp.csv with 6 rows
+2026-03-17 16:57:51 - data_utils - INFO - save_summary completed successfully in 0.01s: Saved 6 rows to C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\customers_temp.csv
+2026-03-17 16:57:51 - __main__ - INFO - Step 4: Load the current orders data and validate format
+2026-03-17 16:57:51 - __main__ - INFO - Step 5: Update customers information in the current orders
+2026-03-17 16:57:51 - __main__ - INFO - Step 6: Load the new orders from to_process directory
+2026-03-17 16:57:51 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-01-10-0000.csv
+2026-03-17 16:57:51 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 2 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-01-10-0000.csv
+2026-03-17 16:57:51 - data_utils - INFO - Starting validate_format with 2 rows
+2026-03-17 16:57:51 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-17 16:57:51 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-02-05-0000.csv
+2026-03-17 16:57:51 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 2 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-02-05-0000.csv
+2026-03-17 16:57:51 - data_utils - INFO - Starting validate_format with 2 rows
+2026-03-17 16:57:51 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-17 16:57:51 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-01-0000.csv
+2026-03-17 16:57:51 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 1 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-01-0000.csv
+2026-03-17 16:57:51 - data_utils - INFO - Starting validate_format with 1 rows
+2026-03-17 16:57:51 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-17 16:57:51 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-10-0000.csv
+2026-03-17 16:57:51 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 1 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-10-0000.csv
+2026-03-17 16:57:51 - data_utils - INFO - Starting validate_format with 1 rows
+2026-03-17 16:57:51 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-17 16:57:51 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-15-0000.csv
+2026-03-17 16:57:51 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 1 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-15-0000.csv
+2026-03-17 16:57:51 - data_utils - INFO - Starting validate_format with 1 rows
+2026-03-17 16:57:51 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-17 16:57:51 - __main__ - INFO - Step 7: Process and enrich the new orders
+2026-03-17 16:57:51 - data_utils - INFO - Starting cleanup_data with 7 rows
+2026-03-17 16:57:51 - data_utils - INFO - cleanup_data completed successfully in 0.01s: Cleaned to 6 rows
+2026-03-17 16:57:51 - data_utils - INFO - Starting add_calculated_metrics with 6 rows
+2026-03-17 16:57:51 - data_utils - INFO - add_calculated_metrics completed successfully in 0.00s: Added metrics to 6 rows
+2026-03-17 16:57:51 - __main__ - INFO - Step 8: Update the current orders data
+2026-03-17 16:57:51 - data_utils - INFO - Starting save_summary to C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\current_intermediate\enriched_raw_data_temp.csv with 6 rows
+2026-03-17 16:57:51 - data_utils - INFO - save_summary completed successfully in 0.00s: Saved 6 rows to C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\current_intermediate\enriched_raw_data_temp.csv
+2026-03-17 16:57:51 - __main__ - INFO - Step 9: Move the processed new orders CSV files to their permanent location
+2026-03-17 16:57:51 - __main__ - INFO - Step 10: Recalculate the resulting data out of orders_df
+2026-03-17 16:57:51 - data_utils - INFO - Starting group_by_month_and_segment with 6 rows
+2026-03-17 16:57:51 - data_utils - INFO - group_by_month_and_segment completed successfully in 0.01s: Grouped to 5 rows
+2026-03-17 16:57:51 - data_utils - INFO - Starting add_advanced_metrics with 5 rows
+2026-03-17 16:57:51 - data_utils - INFO - add_advanced_metrics completed successfully in 0.01s: Added advanced metrics to 5 rows
+2026-03-17 16:57:51 - data_utils - INFO - Starting add_monthly_totals with 5 rows
+2026-03-17 16:57:51 - data_utils - INFO - add_monthly_totals completed successfully in 0.01s: Added totals to 11 rows
+2026-03-17 16:57:51 - __main__ - INFO - Step 11: Save the final result to output file
+2026-03-17 16:57:51 - data_utils - INFO - Starting save_summary to C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\result\summary_temp.csv with 11 rows
+2026-03-17 16:57:51 - data_utils - INFO - save_summary completed successfully in 0.00s: Saved 11 rows to C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\result\summary_temp.csv
+2026-03-17 16:57:51 - __main__ - INFO - Pipeline run completed successfully in 0.10s
+2026-03-17 16:57:51 - __main__ - INFO - ============================================================
+2026-03-19 15:09:22 - __main__ - INFO - ============================================================
+2026-03-19 15:09:22 - __main__ - INFO - Starting pipeline run at 2026-03-19 15:09:22
+2026-03-19 15:09:22 - __main__ - INFO - ============================================================
+2026-03-19 15:09:22 - __main__ - INFO - Step 1: Check pre-conditions before running the main data analytic pipeline
+2026-03-19 15:09:22 - __main__ - INFO - Starting check_preconditions
+2026-03-19 15:09:22 - __main__ - INFO - check_preconditions completed successfully in 0.00s
+2026-03-19 15:09:22 - __main__ - INFO - Step 2: Load customers data and validate format
+2026-03-19 15:09:22 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\customers.csv
+2026-03-19 15:09:22 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 6 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\customers.csv
+2026-03-19 15:09:22 - data_utils - INFO - Starting validate_format with 6 rows
+2026-03-19 15:09:22 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-19 15:09:22 - __main__ - INFO - Step 3: Update customers data if there are updates in the to_process directory
+2026-03-19 15:09:22 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\customers.csv
+2026-03-19 15:09:22 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 6 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\customers.csv
+2026-03-19 15:09:22 - data_utils - INFO - Starting validate_format with 6 rows
+2026-03-19 15:09:22 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-19 15:09:22 - data_utils - INFO - Starting save_summary to C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\customers_temp.csv with 6 rows
+2026-03-19 15:09:22 - data_utils - INFO - save_summary completed successfully in 0.00s: Saved 6 rows to C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\customers_temp.csv
+2026-03-19 15:09:22 - __main__ - INFO - Step 4: Load the current orders data and validate format
+2026-03-19 15:09:22 - __main__ - INFO - Step 5: Update customers information in the current orders
+2026-03-19 15:09:22 - __main__ - INFO - Step 6: Load the new orders from to_process directory
+2026-03-19 15:09:22 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-01-10-0000.csv
+2026-03-19 15:09:22 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 2 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-01-10-0000.csv
+2026-03-19 15:09:22 - data_utils - INFO - Starting validate_format with 2 rows
+2026-03-19 15:09:22 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-19 15:12:16 - __main__ - INFO - ============================================================
+2026-03-19 15:12:16 - __main__ - INFO - Starting pipeline run at 2026-03-19 15:12:16
+2026-03-19 15:12:16 - __main__ - INFO - ============================================================
+2026-03-19 15:12:16 - __main__ - INFO - Step 1: Check pre-conditions before running the main data analytic pipeline
+2026-03-19 15:12:16 - __main__ - INFO - Starting check_preconditions
+2026-03-19 15:12:16 - __main__ - INFO - check_preconditions completed successfully in 0.00s
+2026-03-19 15:12:16 - __main__ - INFO - Step 2: Load customers data and validate format
+2026-03-19 15:12:16 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\customers.csv
+2026-03-19 15:12:16 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 6 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\customers.csv
+2026-03-19 15:12:16 - data_utils - INFO - Starting validate_format with 6 rows
+2026-03-19 15:12:16 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-19 15:12:16 - __main__ - INFO - Step 3: Update customers data if there are updates in the to_process directory
+2026-03-19 15:12:16 - __main__ - INFO - Step 4: Load the current orders data and validate format
+2026-03-19 15:12:16 - __main__ - INFO - Step 5: Update customers information in the current orders
+2026-03-19 15:12:16 - __main__ - INFO - Step 6: Load the new orders from to_process directory
+2026-03-19 15:12:50 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-01-10-0000.csv
+2026-03-19 15:12:50 - data_utils - INFO - load_data completed successfully in 0.01s: Loaded 2 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-01-10-0000.csv
+2026-03-19 15:13:07 - data_utils - INFO - Starting validate_format with 2 rows
+2026-03-19 15:13:07 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-19 15:14:17 - __main__ - INFO - ============================================================
+2026-03-19 15:14:17 - __main__ - INFO - Starting pipeline run at 2026-03-19 15:14:17
+2026-03-19 15:14:17 - __main__ - INFO - ============================================================
+2026-03-19 15:14:17 - __main__ - INFO - Step 1: Check pre-conditions before running the main data analytic pipeline
+2026-03-19 15:14:17 - __main__ - INFO - Starting check_preconditions
+2026-03-19 15:14:17 - __main__ - INFO - check_preconditions completed successfully in 0.00s
+2026-03-19 15:14:17 - __main__ - INFO - Step 2: Load customers data and validate format
+2026-03-19 15:14:17 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\customers.csv
+2026-03-19 15:14:17 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 6 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\customers.csv
+2026-03-19 15:14:17 - data_utils - INFO - Starting validate_format with 6 rows
+2026-03-19 15:14:17 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-19 15:14:17 - __main__ - INFO - Step 3: Update customers data if there are updates in the to_process directory
+2026-03-19 15:14:17 - __main__ - INFO - Step 4: Load the current orders data and validate format
+2026-03-19 15:14:17 - __main__ - INFO - Step 5: Update customers information in the current orders
+2026-03-19 15:14:17 - __main__ - INFO - Step 6: Load the new orders from to_process directory
+2026-03-19 15:14:39 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-01-10-0000.csv
+2026-03-19 15:14:39 - data_utils - INFO - load_data completed successfully in 0.01s: Loaded 2 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-01-10-0000.csv
+2026-03-19 15:14:40 - data_utils - INFO - Starting validate_format with 2 rows
+2026-03-19 15:14:40 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-19 17:39:20 - __main__ - INFO - ============================================================
+2026-03-19 17:39:20 - __main__ - INFO - Starting pipeline run at 2026-03-19 17:39:20
+2026-03-19 17:39:20 - __main__ - INFO - ============================================================
+2026-03-19 17:39:20 - __main__ - INFO - Step 1: Check pre-conditions before running the main data analytic pipeline
+2026-03-19 17:39:20 - __main__ - INFO - Starting check_preconditions
+2026-03-19 17:39:20 - __main__ - INFO - check_preconditions completed successfully in 0.00s
+2026-03-19 17:39:20 - __main__ - INFO - Step 2: Load customers data and validate format
+2026-03-19 17:39:20 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\customers.csv
+2026-03-19 17:39:20 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 6 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\customers.csv
+2026-03-19 17:39:20 - data_utils - INFO - Starting validate_format with 6 rows
+2026-03-19 17:39:20 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-19 17:39:20 - __main__ - INFO - Step 3: Update customers data if there are updates in the to_process directory
+2026-03-19 17:39:20 - __main__ - INFO - Step 4: Load the current orders data and validate format
+2026-03-19 17:39:20 - __main__ - INFO - Step 5: Update customers information in the current orders
+2026-03-19 17:39:20 - __main__ - INFO - Step 6: Load the new orders from to_process directory
+2026-03-19 17:39:20 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-01-10-0000.csv
+2026-03-19 17:39:20 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 2 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-01-10-0000.csv
+2026-03-19 17:39:20 - data_utils - INFO - Starting validate_format with 2 rows
+2026-03-19 17:39:20 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-19 17:39:20 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-02-05-0000.csv
+2026-03-19 17:39:20 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 2 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-02-05-0000.csv
+2026-03-19 17:39:20 - data_utils - INFO - Starting validate_format with 2 rows
+2026-03-19 17:39:20 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-19 17:39:20 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-01-0000.csv
+2026-03-19 17:39:20 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 1 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-01-0000.csv
+2026-03-19 17:39:20 - data_utils - INFO - Starting validate_format with 1 rows
+2026-03-19 17:39:20 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-19 17:39:20 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-10-0000.csv
+2026-03-19 17:39:20 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 1 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-10-0000.csv
+2026-03-19 17:39:20 - data_utils - INFO - Starting validate_format with 1 rows
+2026-03-19 17:39:20 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-19 17:39:20 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-15-0000.csv
+2026-03-19 17:39:20 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 1 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-15-0000.csv
+2026-03-19 17:39:20 - data_utils - INFO - Starting validate_format with 1 rows
+2026-03-19 17:39:20 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-19 17:39:20 - __main__ - INFO - Step 7: Process and enrich the new orders
+2026-03-19 17:39:20 - data_utils - INFO - Starting cleanup_data with 7 rows
+2026-03-19 17:39:20 - data_utils - INFO - cleanup_data completed successfully in 0.00s: Cleaned to 6 rows
+2026-03-19 17:39:20 - data_utils - INFO - Starting add_calculated_metrics with 6 rows
+2026-03-19 17:39:20 - data_utils - INFO - add_calculated_metrics completed successfully in 0.00s: Added metrics to 6 rows
+2026-03-19 17:39:20 - __main__ - INFO - Step 8: Update the current orders data
+2026-03-19 17:39:20 - data_utils - INFO - Starting save_summary to C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\current_intermediate\enriched_raw_data_temp.csv with 6 rows
+2026-03-19 17:39:20 - data_utils - INFO - save_summary completed successfully in 0.00s: Saved 6 rows to C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\current_intermediate\enriched_raw_data_temp.csv
+2026-03-19 17:39:20 - __main__ - INFO - Step 9: Move the processed new orders CSV files to their permanent location
+2026-03-19 17:39:20 - __main__ - INFO - Step 10: Recalculate the resulting data out of orders_df
+2026-03-19 17:39:20 - data_utils - INFO - Starting group_by_month_and_segment with 6 rows
+2026-03-19 17:39:20 - data_utils - INFO - group_by_month_and_segment completed successfully in 0.01s: Grouped to 5 rows
+2026-03-19 17:39:20 - data_utils - INFO - Starting add_advanced_metrics with 5 rows
+2026-03-19 17:39:20 - data_utils - INFO - add_advanced_metrics completed successfully in 0.00s: Added advanced metrics to 5 rows
+2026-03-19 17:39:20 - data_utils - INFO - Starting add_monthly_totals with 5 rows
+2026-03-19 17:39:20 - data_utils - INFO - add_monthly_totals completed successfully in 0.01s: Added totals to 11 rows
+2026-03-19 17:39:20 - __main__ - INFO - Step 11: Save the final result to output file
+2026-03-19 17:39:20 - data_utils - INFO - Starting save_summary to C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\result\summary_temp.csv with 11 rows
+2026-03-19 17:39:20 - data_utils - INFO - save_summary completed successfully in 0.00s: Saved 11 rows to C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\result\summary_temp.csv
+2026-03-19 17:39:20 - __main__ - INFO - Pipeline run completed successfully in 0.06s
+2026-03-19 17:39:20 - __main__ - INFO - ============================================================
+2026-03-20 17:29:47 - __main__ - INFO - ============================================================
+2026-03-20 17:29:47 - __main__ - INFO - Starting pipeline run at 2026-03-20 17:29:47
+2026-03-20 17:29:47 - __main__ - INFO - ============================================================
+2026-03-20 17:29:47 - __main__ - INFO - Step 1: Check pre-conditions before running the main data analytic pipeline
+2026-03-20 17:29:47 - __main__ - INFO - Starting check_preconditions
+2026-03-20 17:29:47 - __main__ - INFO - check_preconditions completed successfully in 0.00s
+2026-03-20 17:29:47 - __main__ - INFO - Step 2: Load customers data and validate format
+2026-03-20 17:29:47 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\customers.csv
+2026-03-20 17:29:47 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 6 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\customers.csv
+2026-03-20 17:29:47 - data_utils - INFO - Starting validate_format with 6 rows
+2026-03-20 17:29:47 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-20 17:29:47 - __main__ - INFO - Step 3: Update customers data if there are updates in the to_process directory
+2026-03-20 17:29:47 - __main__ - INFO - Step 4: Load the current orders data and validate format
+2026-03-20 17:29:47 - __main__ - INFO - Step 5: Update customers information in the current orders
+2026-03-20 17:29:47 - __main__ - INFO - Step 6: Load the new orders from to_process directory
+2026-03-20 17:29:47 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-01-10-0000.csv
+2026-03-20 17:29:47 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 2 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-01-10-0000.csv
+2026-03-20 17:29:47 - data_utils - INFO - Starting validate_format with 2 rows
+2026-03-20 17:29:47 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-20 17:29:47 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-02-05-0000.csv
+2026-03-20 17:29:47 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 2 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-02-05-0000.csv
+2026-03-20 17:29:47 - data_utils - INFO - Starting validate_format with 2 rows
+2026-03-20 17:29:47 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-20 17:29:47 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-01-0000.csv
+2026-03-20 17:29:47 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 1 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-01-0000.csv
+2026-03-20 17:29:47 - data_utils - INFO - Starting validate_format with 1 rows
+2026-03-20 17:29:47 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-20 17:29:47 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-10-0000.csv
+2026-03-20 17:29:47 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 1 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-10-0000.csv
+2026-03-20 17:29:47 - data_utils - INFO - Starting validate_format with 1 rows
+2026-03-20 17:29:47 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-20 17:29:47 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-15-0000.csv
+2026-03-20 17:29:47 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 1 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-15-0000.csv
+2026-03-20 17:29:47 - data_utils - INFO - Starting validate_format with 1 rows
+2026-03-20 17:29:47 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-20 17:29:47 - __main__ - INFO - Step 7: Process and enrich the new orders
+2026-03-20 17:29:47 - data_utils - INFO - Starting cleanup_data with 7 rows
+2026-03-20 17:29:47 - data_utils - WARNING - Found 2 rows with missing segment. Filling with 'UNKNOWN'.
+2026-03-20 17:29:47 - data_utils - WARNING - Found 1 duplicate order_id. Keeping the most recent (last) occurrence and removing duplicates.
+2026-03-20 17:29:47 - data_utils - INFO - cleanup_data completed successfully in 0.01s: Cleaned to 6 rows
+2026-03-20 17:29:47 - data_utils - INFO - Starting add_calculated_metrics with 6 rows
+2026-03-20 17:29:47 - data_utils - INFO - add_calculated_metrics completed successfully in 0.00s: Added metrics to 6 rows
+2026-03-20 17:29:47 - __main__ - INFO - Step 8: Update the current orders data
+2026-03-20 17:29:47 - data_utils - INFO - Starting save_summary to C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\current_intermediate\enriched_raw_data_temp.csv with 6 rows
+2026-03-20 17:29:47 - data_utils - INFO - save_summary completed successfully in 0.00s: Saved 6 rows to C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\current_intermediate\enriched_raw_data_temp.csv
+2026-03-20 17:29:47 - __main__ - INFO - Step 9: Move the processed new orders CSV files to their permanent location
+2026-03-20 17:29:47 - __main__ - INFO - Step 10: Recalculate the resulting data out of orders_df
+2026-03-20 17:29:47 - data_utils - INFO - Starting group_by_month_and_segment with 6 rows
+2026-03-20 17:29:47 - data_utils - INFO - group_by_month_and_segment completed successfully in 0.01s: Grouped to 5 rows
+2026-03-20 17:29:47 - data_utils - INFO - Starting add_advanced_metrics with 5 rows
+2026-03-20 17:29:47 - data_utils - INFO - add_advanced_metrics completed successfully in 0.00s: Added advanced metrics to 5 rows
+2026-03-20 17:29:47 - data_utils - INFO - Starting add_monthly_totals with 5 rows
+2026-03-20 17:29:47 - data_utils - INFO - add_monthly_totals completed successfully in 0.01s: Added totals to 11 rows
+2026-03-20 17:29:47 - __main__ - INFO - Step 11: Save the final result to output file
+2026-03-20 17:29:47 - data_utils - INFO - Starting save_summary to C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\result\summary_temp.csv with 11 rows
+2026-03-20 17:29:47 - data_utils - INFO - save_summary completed successfully in 0.00s: Saved 11 rows to C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\result\summary_temp.csv
+2026-03-20 17:29:47 - __main__ - INFO - Pipeline run completed successfully in 0.08s
+2026-03-20 17:29:47 - __main__ - INFO - ============================================================
+2026-03-20 17:30:57 - __main__ - INFO - ============================================================
+2026-03-20 17:30:57 - __main__ - INFO - Starting pipeline run at 2026-03-20 17:30:57
+2026-03-20 17:30:57 - __main__ - INFO - ============================================================
+2026-03-20 17:30:57 - __main__ - INFO - Step 1: Check pre-conditions before running the main data analytic pipeline
+2026-03-20 17:30:57 - __main__ - INFO - Starting check_preconditions
+2026-03-20 17:30:57 - __main__ - INFO - check_preconditions completed in 0.00s: No new orders to process
+2026-03-24 13:26:48 - __main__ - INFO - ============================================================
+2026-03-24 13:26:48 - __main__ - INFO - Starting pipeline run at 2026-03-24 13:26:48
+2026-03-24 13:26:48 - __main__ - INFO - ============================================================
+2026-03-24 13:26:48 - __main__ - INFO - Step 1: Check pre-conditions before running the main data analytic pipeline
+2026-03-24 13:26:48 - __main__ - INFO - Starting check_preconditions
+2026-03-24 13:26:48 - __main__ - INFO - check_preconditions completed successfully in 0.00s
+2026-03-24 13:26:48 - __main__ - INFO - Step 2: Load customers data and validate format
+2026-03-24 13:26:48 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\customers.csv
+2026-03-24 13:26:49 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 6 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\customers.csv
+2026-03-24 13:26:49 - data_utils - INFO - Starting validate_format with 6 rows
+2026-03-24 13:26:49 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-24 13:26:49 - __main__ - INFO - Step 3: Update customers data if there are updates in the to_process directory
+2026-03-24 13:26:49 - __main__ - INFO - Step 4: Load the current orders data and validate format
+2026-03-24 13:26:49 - __main__ - INFO - Step 5: Update customers information in the current orders
+2026-03-24 13:26:49 - __main__ - INFO - Step 6: Load the new orders from to_process directory
+2026-03-24 13:26:49 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-01-10-0000.csv
+2026-03-24 13:26:49 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 2 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-01-10-0000.csv
+2026-03-24 13:26:49 - data_utils - INFO - Starting validate_format with 2 rows
+2026-03-24 13:26:49 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-24 13:26:49 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-02-05-0000.csv
+2026-03-24 13:26:49 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 2 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-02-05-0000.csv
+2026-03-24 13:26:49 - data_utils - INFO - Starting validate_format with 2 rows
+2026-03-24 13:26:49 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-24 13:26:49 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-01-0000.csv
+2026-03-24 13:26:49 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 1 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-01-0000.csv
+2026-03-24 13:26:49 - data_utils - INFO - Starting validate_format with 1 rows
+2026-03-24 13:26:49 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-24 13:26:49 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-10-0000.csv
+2026-03-24 13:26:49 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 1 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-10-0000.csv
+2026-03-24 13:26:49 - data_utils - INFO - Starting validate_format with 1 rows
+2026-03-24 13:26:49 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-24 13:26:49 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-15-0000.csv
+2026-03-24 13:26:49 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 1 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-15-0000.csv
+2026-03-24 13:26:49 - data_utils - INFO - Starting validate_format with 1 rows
+2026-03-24 13:26:49 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-24 13:26:49 - __main__ - INFO - Step 7: Process and enrich the new orders
+2026-03-24 13:26:49 - data_utils - INFO - Starting cleanup_data with 7 rows
+2026-03-24 13:26:49 - data_utils - WARNING - Found 2 rows with missing segment. Filling with 'UNKNOWN'.
+2026-03-24 13:26:49 - data_utils - WARNING - Found 1 duplicate order_id. Keeping the most recent (last) occurrence and removing duplicates.
+2026-03-24 13:26:49 - data_utils - INFO - cleanup_data completed successfully in 0.01s: Cleaned to 6 rows
+2026-03-24 13:26:49 - data_utils - INFO - Starting add_calculated_metrics with 6 rows
+2026-03-24 13:26:49 - data_utils - INFO - add_calculated_metrics completed successfully in 0.00s: Added metrics to 6 rows
+2026-03-24 13:26:49 - __main__ - INFO - Step 8: Update the current orders data
+2026-03-24 13:26:49 - data_utils - INFO - Starting save_summary to C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\current_intermediate\enriched_raw_data_temp.csv with 6 rows
+2026-03-24 13:26:49 - data_utils - INFO - save_summary completed successfully in 0.00s: Saved 6 rows to C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\current_intermediate\enriched_raw_data_temp.csv
+2026-03-24 13:26:49 - __main__ - INFO - Step 9: Move the processed new orders CSV files to their permanent location
+2026-03-24 13:26:49 - __main__ - INFO - Step 10: Recalculate the resulting data out of orders_df
+2026-03-24 13:26:49 - data_utils - INFO - Starting group_by_month_and_segment with 6 rows
+2026-03-24 13:26:49 - data_utils - INFO - group_by_month_and_segment completed successfully in 0.01s: Grouped to 5 rows
+2026-03-24 13:26:49 - data_utils - INFO - Starting add_advanced_metrics with 5 rows
+2026-03-24 13:31:27 - __main__ - INFO - ============================================================
+2026-03-24 13:31:27 - __main__ - INFO - Starting pipeline run at 2026-03-24 13:31:27
+2026-03-24 13:31:27 - __main__ - INFO - ============================================================
+2026-03-24 13:31:27 - __main__ - INFO - Step 1: Check pre-conditions before running the main data analytic pipeline
+2026-03-24 13:31:27 - __main__ - INFO - Starting check_preconditions
+2026-03-24 13:31:27 - __main__ - INFO - check_preconditions completed successfully in 0.00s
+2026-03-24 13:31:27 - __main__ - INFO - Step 2: Load customers data and validate format
+2026-03-24 13:31:27 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\customers.csv
+2026-03-24 13:31:27 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 6 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\customers.csv
+2026-03-24 13:31:27 - data_utils - INFO - Starting validate_format with 6 rows
+2026-03-24 13:31:27 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-24 13:31:27 - __main__ - INFO - Step 3: Update customers data if there are updates in the to_process directory
+2026-03-24 13:31:27 - __main__ - INFO - Step 4: Load the current orders data and validate format
+2026-03-24 13:31:27 - __main__ - INFO - Step 5: Update customers information in the current orders
+2026-03-24 13:31:27 - __main__ - INFO - Step 6: Load the new orders from to_process directory
+2026-03-24 13:31:27 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-01-10-0000.csv
+2026-03-24 13:31:27 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 2 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-01-10-0000.csv
+2026-03-24 13:31:27 - data_utils - INFO - Starting validate_format with 2 rows
+2026-03-24 13:31:27 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-24 13:31:27 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-02-05-0000.csv
+2026-03-24 13:31:27 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 2 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-02-05-0000.csv
+2026-03-24 13:31:27 - data_utils - INFO - Starting validate_format with 2 rows
+2026-03-24 13:31:27 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-24 13:31:27 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-01-0000.csv
+2026-03-24 13:31:27 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 1 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-01-0000.csv
+2026-03-24 13:31:27 - data_utils - INFO - Starting validate_format with 1 rows
+2026-03-24 13:31:27 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-24 13:31:27 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-10-0000.csv
+2026-03-24 13:31:27 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 1 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-10-0000.csv
+2026-03-24 13:31:27 - data_utils - INFO - Starting validate_format with 1 rows
+2026-03-24 13:31:27 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-24 13:31:27 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-15-0000.csv
+2026-03-24 13:31:27 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 1 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-15-0000.csv
+2026-03-24 13:31:27 - data_utils - INFO - Starting validate_format with 1 rows
+2026-03-24 13:31:27 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-24 13:31:27 - __main__ - INFO - Step 7: Process and enrich the new orders
+2026-03-24 13:31:27 - data_utils - INFO - Starting cleanup_data with 7 rows
+2026-03-24 13:31:27 - data_utils - WARNING - Found 2 rows with missing segment. Filling with 'UNKNOWN'.
+2026-03-24 13:31:27 - data_utils - WARNING - Found 1 duplicate order_id. Keeping the most recent (last) occurrence and removing duplicates.
+2026-03-24 13:31:27 - data_utils - INFO - cleanup_data completed successfully in 0.00s: Cleaned to 6 rows
+2026-03-24 13:31:27 - data_utils - INFO - Starting add_calculated_metrics with 6 rows
+2026-03-24 13:31:27 - data_utils - INFO - add_calculated_metrics completed successfully in 0.00s: Added metrics to 6 rows
+2026-03-24 13:31:27 - __main__ - INFO - Step 8: Update the current orders data
+2026-03-24 13:31:27 - data_utils - INFO - Starting save_summary to C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\current_intermediate\enriched_raw_data_temp.csv with 6 rows
+2026-03-24 13:31:27 - data_utils - INFO - save_summary completed successfully in 0.00s: Saved 6 rows to C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\current_intermediate\enriched_raw_data_temp.csv
+2026-03-24 13:31:27 - __main__ - INFO - Step 9: Move the processed new orders CSV files to their permanent location
+2026-03-24 13:31:27 - __main__ - INFO - Step 10: Recalculate the resulting data out of orders_df
+2026-03-24 13:31:27 - data_utils - INFO - Starting group_by_month_and_segment with 6 rows
+2026-03-24 13:31:27 - data_utils - INFO - group_by_month_and_segment completed successfully in 0.01s: Grouped to 5 rows
+2026-03-24 13:31:27 - data_utils - INFO - Starting add_advanced_metrics with 5 rows
+2026-03-24 13:31:27 - data_utils - INFO - add_advanced_metrics completed successfully in 0.00s: Added advanced metrics to 5 rows
+2026-03-24 13:31:27 - data_utils - INFO - Starting add_monthly_totals with 5 rows
+2026-03-24 13:31:27 - data_utils - INFO - add_monthly_totals completed successfully in 0.01s: Added totals to 11 rows
+2026-03-24 13:31:27 - __main__ - INFO - Step 11: Save the final result to output file
+2026-03-24 13:31:27 - data_utils - INFO - Starting save_summary to C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\result\summary_temp.csv with 11 rows
+2026-03-24 13:31:27 - data_utils - INFO - save_summary completed successfully in 0.00s: Saved 11 rows to C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\result\summary_temp.csv
+2026-03-24 13:31:27 - __main__ - INFO - Pipeline run completed successfully in 0.06s
+2026-03-24 13:31:27 - __main__ - INFO - ============================================================
+2026-03-24 14:28:54 - __main__ - INFO - ============================================================
+2026-03-24 14:28:54 - __main__ - INFO - Starting pipeline run at 2026-03-24 14:28:54
+2026-03-24 14:28:54 - __main__ - INFO - ============================================================
+2026-03-24 14:28:54 - __main__ - INFO - Step 1: Check pre-conditions before running the main data analytic pipeline
+2026-03-24 14:28:54 - __main__ - INFO - Starting check_preconditions
+2026-03-24 14:28:54 - __main__ - INFO - check_preconditions completed successfully in 0.00s
+2026-03-24 14:28:54 - __main__ - INFO - Step 2: Load customers data and validate format
+2026-03-24 14:28:54 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\customers.csv
+2026-03-24 14:28:54 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 6 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\customers.csv
+2026-03-24 14:28:54 - data_utils - INFO - Starting validate_format with 6 rows
+2026-03-24 14:28:54 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-24 14:28:54 - __main__ - INFO - Step 3: Update customers data if there are updates in the to_process directory
+2026-03-24 14:28:54 - __main__ - INFO - Step 4: Load the current orders data and validate format
+2026-03-24 14:28:54 - __main__ - INFO - Step 5: Update customers information in the current orders
+2026-03-24 14:28:54 - __main__ - INFO - Step 6: Load the new orders from to_process directory
+2026-03-24 14:28:54 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-01-10-0000.csv
+2026-03-24 14:28:54 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 2 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-01-10-0000.csv
+2026-03-24 14:28:54 - data_utils - INFO - Starting validate_format with 2 rows
+2026-03-24 14:28:54 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-24 14:28:54 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-02-05-0000.csv
+2026-03-24 14:28:54 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 2 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-02-05-0000.csv
+2026-03-24 14:28:54 - data_utils - INFO - Starting validate_format with 2 rows
+2026-03-24 14:28:54 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-24 14:28:54 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-01-0000.csv
+2026-03-24 14:28:54 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 1 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-01-0000.csv
+2026-03-24 14:28:54 - data_utils - INFO - Starting validate_format with 1 rows
+2026-03-24 14:28:54 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-24 14:28:54 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-10-0000.csv
+2026-03-24 14:28:54 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 1 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-10-0000.csv
+2026-03-24 14:28:54 - data_utils - INFO - Starting validate_format with 1 rows
+2026-03-24 14:28:54 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-24 14:28:54 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-15-0000.csv
+2026-03-24 14:28:54 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 1 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-15-0000.csv
+2026-03-24 14:28:54 - data_utils - INFO - Starting validate_format with 1 rows
+2026-03-24 14:28:54 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-24 14:28:54 - __main__ - INFO - Step 7: Process and enrich the new orders
+2026-03-24 14:28:54 - data_utils - INFO - Starting cleanup_data with 7 rows
+2026-03-24 14:28:54 - data_utils - WARNING - Found 2 rows with missing segment. Filling with 'UNKNOWN'.
+2026-03-24 14:28:54 - data_utils - WARNING - Found 1 duplicate order_id. Keeping the most recent (last) occurrence and removing duplicates.
+2026-03-24 14:28:54 - data_utils - INFO - cleanup_data completed successfully in 0.00s: Cleaned to 6 rows
+2026-03-24 14:28:54 - data_utils - INFO - Starting add_calculated_metrics with 6 rows
+2026-03-24 14:28:54 - data_utils - INFO - add_calculated_metrics completed successfully in 0.00s: Added metrics to 6 rows
+2026-03-24 14:28:54 - __main__ - INFO - Step 8: Update the current orders data
+2026-03-24 14:28:54 - data_utils - INFO - Starting save_summary to C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\current_intermediate\enriched_raw_data_temp.csv with 6 rows
+2026-03-24 14:28:54 - data_utils - INFO - save_summary completed successfully in 0.00s: Saved 6 rows to C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\current_intermediate\enriched_raw_data_temp.csv
+2026-03-24 14:28:54 - __main__ - INFO - Step 9: Move the processed new orders CSV files to their permanent location
+2026-03-24 14:28:54 - __main__ - INFO - Step 10: Recalculate the resulting data out of orders_df
+2026-03-24 14:28:54 - data_utils - INFO - Starting group_by_month_and_segment with 6 rows
+2026-03-24 14:28:54 - data_utils - INFO - group_by_month_and_segment completed successfully in 0.01s: Grouped to 5 rows
+2026-03-24 14:28:54 - data_utils - INFO - Starting add_advanced_metrics with 5 rows
+2026-03-24 14:28:54 - data_utils - INFO - add_advanced_metrics completed successfully in 0.00s: Added advanced metrics to 5 rows
+2026-03-24 14:28:54 - data_utils - INFO - Starting add_monthly_totals with 5 rows
+2026-03-24 14:28:54 - data_utils - INFO - add_monthly_totals completed successfully in 0.01s: Added totals to 11 rows
+2026-03-24 14:28:54 - __main__ - INFO - Step 11: Save the final result to output file
+2026-03-24 14:28:54 - data_utils - INFO - Starting save_summary to C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\result\summary_temp.csv with 11 rows
+2026-03-24 14:28:54 - data_utils - INFO - save_summary completed successfully in 0.00s: Saved 11 rows to C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\result\summary_temp.csv
+2026-03-24 14:28:54 - __main__ - INFO - Pipeline run completed successfully in 0.06s
+2026-03-24 14:28:54 - __main__ - INFO - ============================================================
+2026-03-24 14:40:49 - __main__ - INFO - ============================================================
+2026-03-24 14:40:49 - __main__ - INFO - Starting pipeline run at 2026-03-24 14:40:49
+2026-03-24 14:40:49 - __main__ - INFO - ============================================================
+2026-03-24 14:40:49 - __main__ - INFO - Step 1: Check pre-conditions before running the main data analytic pipeline
+2026-03-24 14:40:49 - __main__ - INFO - Starting check_preconditions
+2026-03-24 14:40:49 - __main__ - INFO - check_preconditions completed successfully in 0.00s
+2026-03-24 14:40:49 - __main__ - INFO - Step 2: Load customers data and validate format
+2026-03-24 14:40:49 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\customers.csv
+2026-03-24 14:40:49 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 6 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\customers.csv
+2026-03-24 14:40:49 - data_utils - INFO - Starting validate_format with 6 rows
+2026-03-24 14:40:49 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-24 14:40:49 - __main__ - INFO - Step 3: Update customers data if there are updates in the to_process directory
+2026-03-24 14:40:49 - __main__ - INFO - Step 4: Load the current orders data and validate format
+2026-03-24 14:40:49 - __main__ - INFO - Step 5: Update customers information in the current orders
+2026-03-24 14:40:49 - __main__ - INFO - Step 6: Load the new orders from to_process directory
+2026-03-24 14:40:49 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-01-10-0000.csv
+2026-03-24 14:40:49 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 2 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-01-10-0000.csv
+2026-03-24 14:40:49 - data_utils - INFO - Starting validate_format with 2 rows
+2026-03-24 14:40:49 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-24 14:40:49 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-02-05-0000.csv
+2026-03-24 14:40:49 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 2 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-02-05-0000.csv
+2026-03-24 14:40:49 - data_utils - INFO - Starting validate_format with 2 rows
+2026-03-24 14:40:49 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-24 14:40:49 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-01-0000.csv
+2026-03-24 14:40:49 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 1 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-01-0000.csv
+2026-03-24 14:40:49 - data_utils - INFO - Starting validate_format with 1 rows
+2026-03-24 14:40:49 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-24 14:40:49 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-10-0000.csv
+2026-03-24 14:40:49 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 1 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-10-0000.csv
+2026-03-24 14:40:49 - data_utils - INFO - Starting validate_format with 1 rows
+2026-03-24 14:40:49 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-24 14:40:49 - data_utils - INFO - Starting load_data for C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-15-0000.csv
+2026-03-24 14:40:49 - data_utils - INFO - load_data completed successfully in 0.00s: Loaded 1 rows from C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\to_process\orders-2024-03-15-0000.csv
+2026-03-24 14:40:49 - data_utils - INFO - Starting validate_format with 1 rows
+2026-03-24 14:40:49 - data_utils - INFO - validate_format completed successfully in 0.00s: All required columns present
+2026-03-24 14:40:49 - __main__ - INFO - Step 7: Process and enrich the new orders
+2026-03-24 14:40:49 - data_utils - INFO - Starting cleanup_data with 7 rows
+2026-03-24 14:40:49 - data_utils - WARNING - Found 2 rows with missing segment. Filling with 'UNKNOWN'.
+2026-03-24 14:40:49 - data_utils - WARNING - Found 1 duplicate order_id. Keeping the most recent (last) occurrence and removing duplicates.
+2026-03-24 14:40:49 - data_utils - INFO - cleanup_data completed successfully in 0.01s: Cleaned to 6 rows
+2026-03-24 14:40:49 - data_utils - INFO - Starting add_calculated_metrics with 6 rows
+2026-03-24 14:40:49 - data_utils - INFO - add_calculated_metrics completed successfully in 0.00s: Added metrics to 6 rows
+2026-03-24 14:40:49 - __main__ - INFO - Step 8: Update the current orders data
+2026-03-24 14:40:49 - data_utils - INFO - Starting save_summary to C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\current_intermediate\enriched_raw_data_temp.csv with 6 rows
+2026-03-24 14:40:49 - data_utils - INFO - save_summary completed successfully in 0.00s: Saved 6 rows to C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\input\current_intermediate\enriched_raw_data_temp.csv
+2026-03-24 14:40:49 - __main__ - INFO - Step 9: Move the processed new orders CSV files to their permanent location
+2026-03-24 14:40:49 - __main__ - INFO - Step 10: Recalculate the resulting data out of orders_df
+2026-03-24 14:40:49 - data_utils - INFO - Starting group_by_month_and_segment with 6 rows
+2026-03-24 14:40:49 - data_utils - INFO - group_by_month_and_segment completed successfully in 0.01s: Grouped to 5 rows
+2026-03-24 14:40:49 - data_utils - INFO - Starting add_advanced_metrics with 5 rows
+2026-03-24 14:40:49 - data_utils - INFO - add_advanced_metrics completed successfully in 0.00s: Added advanced metrics to 5 rows
+2026-03-24 14:40:49 - data_utils - INFO - Starting add_monthly_totals with 5 rows
+2026-03-24 14:40:49 - data_utils - INFO - add_monthly_totals completed successfully in 0.01s: Added totals to 11 rows
+2026-03-24 14:40:49 - __main__ - INFO - Step 11: Save the final result to output file
+2026-03-24 14:40:49 - data_utils - INFO - Starting save_summary to C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\result\summary_temp.csv with 11 rows
+2026-03-24 14:40:49 - data_utils - INFO - save_summary completed successfully in 0.00s: Saved 11 rows to C:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data\result\summary_temp.csv
+2026-03-24 14:40:49 - __main__ - INFO - Pipeline run completed successfully in 0.07s
+2026-03-24 14:40:49 - __main__ - INFO - ============================================================
