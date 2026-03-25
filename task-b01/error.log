@@ -1,0 +1,74 @@
+Traceback (most recent call last):
+  File "c:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data_pipeline.py", line 235, in <module>
+    main()
+    ~~~~^^
+  File "c:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data_pipeline.py", line 136, in main
+    customers_df = pd.concat([customers_df, customers_updates_df], ignore_index=True)
+                              ^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'customers_df' where it is not associated with a value
+
+Traceback (most recent call last):
+  File "C:\Users\pavel\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\frame.py", line 16700, in _reindex_for_setitem
+    reindexed_value = value.reindex(index)._values
+                      ~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\pavel\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\series.py", line 5525, in reindex
+    return super().reindex(
+           ~~~~~~~~~~~~~~~^
+        index=index,
+        ^^^^^^^^^^^^
+    ...<5 lines>...
+        copy=copy,
+        ^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\pavel\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\generic.py", line 5476, in reindex
+    return self._reindex_axes(
+           ~~~~~~~~~~~~~~~~~~^
+        axes, level, limit, tolerance, method, fill_value
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ).__finalize__(self, method="reindex")
+    ^
+  File "C:\Users\pavel\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\generic.py", line 5498, in _reindex_axes
+    new_index, indexer = ax.reindex(
+                         ~~~~~~~~~~^
+        labels, level=level, limit=limit, tolerance=tolerance, method=method
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\pavel\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\indexes\base.py", line 4257, in reindex
+    target = self._wrap_reindex_result(target, indexer, preserve_names)
+  File "C:\Users\pavel\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\indexes\multi.py", line 3193, in _wrap_reindex_result
+    target = MultiIndex.from_tuples(target)
+  File "C:\Users\pavel\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\indexes\multi.py", line 191, in new_meth
+    return meth(self_or_cls, *args, **kwargs)
+  File "C:\Users\pavel\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\indexes\multi.py", line 584, in from_tuples
+    arrays = list(lib.tuples_to_object_array(tuples).T)
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "pandas/_libs/lib.pyx", line 3128, in pandas._libs.lib.tuples_to_object_array
+ValueError: Buffer dtype mismatch, expected 'Python object' but got 'long long'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data_pipeline.py", line 243, in <module>
+    main()
+    ~~~~^^
+  File "c:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data_pipeline.py", line 227, in main
+    final_result_df = add_advanced_metrics(grouped_df)
+  File "c:\Users\pavel\Documents\Work\Tutorials\python\pandas\task-b01\data_utils.py", line 202, in add_advanced_metrics
+    df["rolling_avg_revenue"] = df.groupby("segment")["total_revenue"].rolling(window=3, min_periods=1).mean()
+    ~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\pavel\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\frame.py", line 4672, in __setitem__
+    self._set_item(key, value)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\pavel\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\frame.py", line 4872, in _set_item
+    value, refs = self._sanitize_column(value)
+                  ~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\pavel\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\frame.py", line 5739, in _sanitize_column
+    return _reindex_for_setitem(value, self.index)
+  File "C:\Users\pavel\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\frame.py", line 16707, in _reindex_for_setitem
+    raise TypeError(
+        "incompatible index of inserted column with frame index"
+    ) from err
+TypeError: incompatible index of inserted column with frame index
+
