@@ -1,5 +1,8 @@
+import csv
+
 import pandas as pd
 from pathlib import Path
+import re
 import logging
 import time
 
@@ -13,21 +16,88 @@ def load_data(input_path: Path) -> pd.DataFrame:
     
     if not input_path.exists():
         end_time = time.time()
-        logger.error(f"load_data failed in {end_time - start_time:.2f}s: Input file not found: {input_path}")
-        raise FileNotFoundError(f"Input file not found: {input_path}")
+        logger.warning(f"load_data failed in {end_time - start_time:.2f}s: Input file not found: {input_path}")
+        return None  # Return None if file is not found, allowing the pipeline to skip this file and continue with others
     try:
-        df = pd.read_csv(input_path)
+        df = pd.read_csv(input_path,
+                         encoding="utf-8-sig",  # Handle potential BOM in UTF-8 files
+                         encoding_errors="replace",  # Replace characters that can't be decoded
+                         quotechar='"',  # Handle quoted fields - this allows fields to contain delimiters if they are enclosed in quotes
+                         doublequote=True,  # Handle double quotes inside quoted fields to correctly work with Ecxel-generated CSVs
+                         quoting=csv.QUOTE_MINIMAL,  # Only quote fields when necessary (special characters, delimiters, etc.)
+                         skipinitialspace=True,  # Skip spaces after delimiters
+                         skip_blank_lines=True,  # Skip blank lines in the file
+                         on_bad_lines="warn",  # Warn about bad lines but don't fail
+                         low_memory=False,  # Process the file in one go to better handle mixed types
+                         na_values=["", "NA", "N/A", "#N/A", "nan", "null"],  # Treat common placeholders as NaN
+        )
+        df.columns = df.columns.str.strip()  # Strip whitespace from column names
         end_time = time.time()
         logger.info(f"load_data completed successfully in {end_time - start_time:.2f}s: Loaded {len(df)} rows from {input_path}")
         return df
     except pd.errors.EmptyDataError:
         end_time = time.time()
-        logger.error(f"load_data failed in {end_time - start_time:.2f}s: Input file is empty: {input_path}")
-        raise ValueError(f"Input file is empty: {input_path}")
+        logger.warning(f"load_data failed in {end_time - start_time:.2f}s: Input file is empty: {input_path}")
+        return None # Return None if file is empty, allowing the pipeline to skip this file and continue with others
     except pd.errors.ParserError:
         end_time = time.time()
-        logger.error(f"load_data failed in {end_time - start_time:.2f}s: Failed to parse input file: {input_path}")
-        raise ValueError(f"Failed to parse input file: {input_path}")
+        logger.warning(f"load_data failed in {end_time - start_time:.2f}s: Failed to parse input file: {input_path}")
+        return None  # Return None if parsing fails, allowing the pipeline to skip this file and continue with others
+    
+
+# A wrapper around load_data().
+# - It makes sure that the file name meets the expected pattern (orders-YYYY-MM-DD-NNNN.csv);
+# - It enriches the loaded DataFame with three temporary columns (will not appear in the final output):
+#   - ingestion_date = the date when the file is created (taken from the file name, YYYY-MM-DD part, checked for validity)
+#   - ingestion_seq = the sequence number of the file (taken from the file name, NNNN part, checked for validity - it should be a number)
+#   - index = the original row number in the file (starting from 0)
+# If the file name doesn't meet the expected pattern or if the date or sequence number are invalid, it logs an error and returns None.
+# The reason is that the files are read in a cycle and if one file is invalid we don't want to stop the whole process,
+# but just skip that file and continue with the next ones.
+# The pipeline is idempotent, so if a file is skipped in one cycle it will be processed in the next cycle when the issue is fixed.
+def load_and_enrich_metadata(input_path: Path) -> pd.DataFrame:
+    logger = logging.getLogger(__name__)
+    start_time = time.time()
+    logger.info(f"Starting load_and_enrich_metadata for {input_path}")
+    
+    # 1. Checking the file name format with regex (orders-YYYY-MM-DD-NNNN.csv)
+    match = re.match(r'^orders-(\d{4}-\d{2}-\d{2})-(\d{4})\.csv$', input_path.name)
+    if not match:
+        logging.warning(f"Skipping file '{input_path.name}': Invalid file name format.")
+        return None
+    
+    date_str, seq_str = match.groups()
+
+    # 2. Quick validation of the date (protection against December 32nd)
+    try:
+        # pd.to_datetime validates the date and raises an error if it's invalid with option errors='raise'
+        ingestion_date = pd.to_datetime(date_str, errors='raise').date()
+    except ValueError:
+        logger.warning(f"Skipping file '{input_path.name}': Invalid date in the file name.")
+        return None
+    
+    # 3. Quick validation of the sequence number (should be a number)
+    if not seq_str.isdigit():
+        logger.warning(f"Skipping file '{input_path.name}': Invalid sequence number in the file name. Should be a number between 0000 and 9999.")
+        return None
+
+    # 4. Load the CSV file with the input data by the wrapped load_data() function
+    df = load_data(input_path)
+    if df is None:
+        return None
+
+    # 5. Enrich the loaded DataFrame with three temporary columns (will not appear in the final output):
+    # - ingestion_date = the date when the file is created (taken from the file name, YYYY-MM-DD part, checked for validity)
+    # - ingestion_seq = the sequence number of the file (taken from the file name, NNNN part, checked for validity - it should be a number)
+    # - index = the original row number in the file (starting from 0)
+    df['ingestion_date'] = ingestion_date
+    df['ingestion_seq'] = int(seq_str)
+    df['index'] = df.index
+
+    end_time = time.time()
+    logger.info(f"load_and_enrich_metadata completed successfully in {end_time - start_time:.2f}s: Loaded and enriched metadata for {len(df)} rows from {input_path}")
+
+    return df
     
 
 # Validates the input DataFrame for required columns
@@ -137,7 +207,7 @@ def cleanup_data(df: pd.DataFrame, required_cols: set) -> pd.DataFrame:
     # Check for duplicate order_id and keep the most recent (last) occurrence
     # Log the number of duplicate order_id found and removed
     duplicate_order_id_count = cleaned_df.duplicated(subset=["order_id"], keep="last").sum()
-    cleaned_df = cleaned_df.sort_values(by=["ingestion_date", "index"], ascending=[True, True])  # Ensure the most recent occurrence is last
+    cleaned_df = cleaned_df.sort_values(by=["ingestion_date", "ingestion_seq", "index"], ascending=[True, True, True])  # Ensure the most recent occurrence is last
     if duplicate_order_id_count > 0:
         logger.warning(f"Found {duplicate_order_id_count} duplicate order_id. Keeping the most recent (last) occurrence and removing duplicates.")
         cleaned_df = cleaned_df.drop_duplicates(subset=["order_id"], keep="last")

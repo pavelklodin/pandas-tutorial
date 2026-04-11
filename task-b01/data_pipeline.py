@@ -5,6 +5,7 @@ import logging
 import time
 from data_utils import (
     load_data,
+    load_and_enrich_metadata,
     validate_format,
     cleanup_data,
     add_calculated_metrics,
@@ -175,11 +176,13 @@ def main() -> None:
     orders_to_process_df = pd.DataFrame()
     # only files with zero-padded year/month/day/sequence match; lexical sort orders them correctly
     for file in sorted(to_process_dir.glob("orders-????-??-??-????.csv")):
-        new_orders_df = load_data(file)
-        new_orders_df = new_orders_df.reset_index() # make the 'index' column out of the lines in the file
+        new_orders_df = load_and_enrich_metadata(file)
         validate_format(new_orders_df, orders_cols)
-        new_orders_df["ingestion_date"] = "-".join(file.stem.split("-")[1:5])  # extract YYYY-MM-DD-NNNN from filename
         orders_to_process_df = pd.concat([orders_to_process_df, new_orders_df], ignore_index=True)
+    if orders_to_process_df.empty:
+        pipeline_end = time.time()
+        logger.info(f"pipeline completed in {pipeline_end - pipeline_start:.2f}s: No new orders to process. Exiting.")
+        exit(0)
 
     # Step 7: Process and enrich the new orders:
     # - left join the new orders with customers_df on customer_id
@@ -199,7 +202,7 @@ def main() -> None:
     logger.info("Step 8: Update the current orders data")
     if not orders_to_process_df.empty:
         orders_df = pd.concat([current_orders_df, orders_to_process_df], ignore_index=True)
-        orders_df = orders_df.sort_values(by=["order_id", "ingestion_date"])  # sort by order_id and ingestion_date to keep the last occurrence in case of duplicates
+        orders_df = orders_df.sort_values(by=["order_id", "ingestion_date", "ingestion_seq", "index"], ascending=[True, True, True, True])  # sort by order_id and ingestion_date to keep the last occurrence in case of duplicates
         orders_df = orders_df.drop_duplicates(subset=["order_id"], keep="last")
         temp_orders_path = current_intermediate_dir / "enriched_raw_data_temp.csv"
         save_summary(orders_df, temp_orders_path)
