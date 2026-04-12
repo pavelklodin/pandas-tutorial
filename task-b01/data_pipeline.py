@@ -57,7 +57,7 @@ logger = logging.getLogger(__name__)
 # - Check if there are the order data to process.
 #   If there are no new orders to process (no files in data/input/to_process with the name pattern "orders-<YYYY>-<MM>-<DD>-<NNNN>.csv"),
 #   then exit with a message that no data to process (not an error!).
-# - Check immtable raw data in folders data/input/<year>/<month>/<day> for consistency.
+# - Check immutable raw data in folders data/input/<year>/<month>/<day> for consistency.
 #   1. If there are no files with the name pattern "orders-<YYYY>-<MM>-<DD>-<NNNN>.csv" in these folders,
 #      then the first run is considered. Intermediate result data/input/current_intermediate/enriched_raw_data.csv
 #      should not exist.
@@ -69,7 +69,7 @@ logger = logging.getLogger(__name__)
 #      If it doesn't exist - raise an exception with a message that the intermediate result is missing.
 #      It is recommended to move the immutable raw data to folder data/input/to_process and run the script again.
 #      to restore the intermediate result.
-def check_preconditions() -> None:
+def check_preconditions(pipeline_start: float) -> None:
     start_time = time.time()
     logger.info(f"Starting check_preconditions")
     
@@ -77,6 +77,8 @@ def check_preconditions() -> None:
     if not input_cusomers.exists() and not customers_to_process.exists():
         end_time = time.time()
         logger.error(f"check_preconditions failed in {end_time - start_time:.2f}s: Customers metadata is missing")
+        pipeline_end = time.time()
+        logger.info(f"Pipeline completed in {pipeline_end - pipeline_start:.2f}s")
         raise FileNotFoundError(
             f"Customers metadata is missing. Please provide the customers.csv file in either {input_cusomers} or {customers_to_process}."
         )
@@ -98,7 +100,9 @@ def check_preconditions() -> None:
         )
     elif raw_data_files and not intermediate_result_exists:
         end_time = time.time()
-        logger.error(f"check_preconditions failed in {end_time - start_time:.2f}s: Intermediate result is missing while immutable raw data exists")
+        logger.error(f"check_preconditions failed in {end_time - start_time:.2f}s: Intermediate result is missing while immutable raw data exists. It is recommended to move the immutable raw data to the data/input/to_process folder and run the script again to restore the intermediate result.")
+        pipeline_end = time.time()
+        logger.info(f"Pipeline completed in {pipeline_end - pipeline_start:.2f}s")
         raise FileNotFoundError(
             "Intermediate result is missing while immutable raw data exists. It is recommended to move the immutable raw data to the data/input/to_process folder and run the script again to restore the intermediate result."
         )
@@ -123,6 +127,9 @@ def main() -> None:
     if input_cusomers.exists():
         customers_df = load_data(input_cusomers)
         validate_format(customers_df, customers_cols)
+    if customers_df["customer_id"].duplicated().any(): # duplication may only happen if immutable customers metadata was updated manually.
+        logger.warning("Duplicate customer_id found in customers data. Keeping the last occurrence and removing duplicates.")
+        customers_df = customers_df.drop_duplicates(subset=["customer_id"], keep="last")
 
     # Step 3: If there are updates to customers data in customers_to_process, load and validate it,
     # then overwrite the original customers.csv
@@ -190,23 +197,26 @@ def main() -> None:
     # - add calculated metrics to the cleaned DataFrame by running the add_calculated_metrics function
     # - if there are no new orders, skip to the next step
     logger.info("Step 7: Process and enrich the new orders")
-    if not orders_to_process_df.empty:
-        orders_to_process_df = orders_to_process_df.merge(customers_df, on="customer_id", how="left", validate="many_to_one")
-        orders_to_process_df = cleanup_data(orders_to_process_df, orders_cols)
-        orders_to_process_df = add_calculated_metrics(orders_to_process_df)
+    orders_to_process_df = orders_to_process_df.merge(customers_df, on="customer_id", how="left", validate="many_to_one")
+    orders_to_process_df = cleanup_data(orders_to_process_df, orders_cols)
+    orders_to_process_df = add_calculated_metrics(orders_to_process_df)
     
     # Step 8: Update the current orders data:
     # - concatenate the current orders with the processed new orders
     # - if there are duplicate order_id (no matter if they have the same or different data), keep the last occurrence (assuming it's the most recent update)
     # - save the updated current orders data to a temporary file and then move it to the original location (to avoid issues if the file is open in Excel or similar)
     logger.info("Step 8: Update the current orders data")
-    if not orders_to_process_df.empty:
-        orders_df = pd.concat([current_orders_df, orders_to_process_df], ignore_index=True)
-        orders_df = orders_df.sort_values(by=["order_id", "ingestion_date", "ingestion_seq", "index"], ascending=[True, True, True, True])  # sort by order_id and ingestion_date to keep the last occurrence in case of duplicates
-        orders_df = orders_df.drop_duplicates(subset=["order_id"], keep="last")
-        temp_orders_path = current_intermediate_dir / "enriched_raw_data_temp.csv"
-        save_summary(orders_df, temp_orders_path)
-        os.replace(temp_orders_path, current_orders)
+    if set(orders_df.columns) != set(orders_to_process_df.columns): # can only concatenate if columns match, otherwise log an error and raise an exception
+        logger.error(f"Column mismatch between current orders and new orders. Current orders columns: {orders_df.columns}, New orders columns: {orders_to_process_df.columns}")
+        pipeline_end = time.time()
+        logger.info(f"Pipeline completed in {pipeline_end - pipeline_start:.2f}s")
+        raise ValueError("Column mismatch between current orders and new orders. Please check the logs for details.")
+    orders_df = pd.concat([current_orders_df, orders_to_process_df], ignore_index=True)
+    orders_df = orders_df.sort_values(by=["order_id", "ingestion_date", "ingestion_seq", "index"], ascending=[True, True, True, True])  # sort by order_id and ingestion_date to keep the last occurrence in case of duplicates
+    orders_df = orders_df.drop_duplicates(subset=["order_id"], keep="last")
+    temp_orders_path = current_intermediate_dir / "enriched_raw_data_temp.csv"
+    save_summary(orders_df, temp_orders_path)
+    os.replace(temp_orders_path, current_orders)
     
     # Step 9: Move the processed new orders CSV files to their permanent location:
     # - input_dir/YYYY/MM/DD/orders-<NNNN>.csv

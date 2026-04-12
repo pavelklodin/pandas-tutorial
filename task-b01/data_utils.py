@@ -23,7 +23,7 @@ def load_data(input_path: Path) -> pd.DataFrame:
                          encoding="utf-8-sig",  # Handle potential BOM in UTF-8 files
                          encoding_errors="replace",  # Replace characters that can't be decoded
                          quotechar='"',  # Handle quoted fields - this allows fields to contain delimiters if they are enclosed in quotes
-                         doublequote=True,  # Handle double quotes inside quoted fields to correctly work with Ecxel-generated CSVs
+                         doublequote=True,  # Handle double quotes inside quoted fields to correctly work with Excel-generated CSVs
                          quoting=csv.QUOTE_MINIMAL,  # Only quote fields when necessary (special characters, delimiters, etc.)
                          skipinitialspace=True,  # Skip spaces after delimiters
                          skip_blank_lines=True,  # Skip blank lines in the file
