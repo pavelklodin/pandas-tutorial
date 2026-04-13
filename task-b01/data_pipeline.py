@@ -30,7 +30,7 @@ output_file = result_dir / "revenue_summary.csv"
 
 customers_cols = {"customer_id", "segment"}
 orders_cols = {"order_id", "customer_id", "order_date", "quantity", "unit_price"}
-joined_cols = {"order_id", "customer_id", "order_date", "quantity", "unit_price", "segment", "ingestion_date"}
+joined_cols = {"order_id", "customer_id", "order_date", "quantity", "unit_price", "segment", "ingestion_date", "ingestion_seq", "index", "segment", "revenue", "order_month"}
 
 # Configure logging
 log_file = base_dir / "pipeline.log"
@@ -119,17 +119,18 @@ def main() -> None:
 
     # Step 1: Check pre-conditions before running the main data analytic pipeline
     logger.info("Step 1: Check pre-conditions before running the main data analytic pipeline")
-    check_preconditions()
+    check_preconditions(pipeline_start)
 
     # Step 2: Load customers data and validate format
     logger.info("Step 2: Load customers data and validate format")
-    customers_df = pd.DataFrame(columns=list(customers_cols))  # default empty DataFrame with expected columns
+    #customers_df = pd.DataFrame(columns=list(customers_cols))  # default empty DataFrame with expected columns
+    customers_df = pd.DataFrame()
     if input_cusomers.exists():
         customers_df = load_data(input_cusomers)
         validate_format(customers_df, customers_cols)
-    if customers_df["customer_id"].duplicated().any(): # duplication may only happen if immutable customers metadata was updated manually.
-        logger.warning("Duplicate customer_id found in customers data. Keeping the last occurrence and removing duplicates.")
-        customers_df = customers_df.drop_duplicates(subset=["customer_id"], keep="last")
+        if customers_df["customer_id"].duplicated().any(): # duplication may only happen if immutable customers metadata was updated manually.
+            logger.warning("Duplicate customer_id found in customers data. Keeping the last occurrence and removing duplicates.")
+            customers_df = customers_df.drop_duplicates(subset=["customer_id"], keep="last")
 
     # Step 3: If there are updates to customers data in customers_to_process, load and validate it,
     # then overwrite the original customers.csv
@@ -161,6 +162,9 @@ def main() -> None:
         validate_format(current_orders_df, joined_cols)
     else:
         current_orders_df = pd.DataFrame(columns=list(joined_cols))
+
+    # Normalize dtypes for the current orders data
+    current_orders_df = cleanup_data(current_orders_df, orders_cols)
 
     # Step 5: Update customers information in the current orders if needed
     logger.info("Step 5: Update customers information in the current orders")
@@ -206,8 +210,8 @@ def main() -> None:
     # - if there are duplicate order_id (no matter if they have the same or different data), keep the last occurrence (assuming it's the most recent update)
     # - save the updated current orders data to a temporary file and then move it to the original location (to avoid issues if the file is open in Excel or similar)
     logger.info("Step 8: Update the current orders data")
-    if set(orders_df.columns) != set(orders_to_process_df.columns): # can only concatenate if columns match, otherwise log an error and raise an exception
-        logger.error(f"Column mismatch between current orders and new orders. Current orders columns: {orders_df.columns}, New orders columns: {orders_to_process_df.columns}")
+    if set(current_orders_df.columns) != set(orders_to_process_df.columns): # can only concatenate if columns match, otherwise log an error and raise an exception
+        logger.error(f"Column mismatch between current orders and new orders. Current orders columns: {current_orders_df.columns}, New orders columns: {orders_to_process_df.columns}")
         pipeline_end = time.time()
         logger.info(f"Pipeline completed in {pipeline_end - pipeline_start:.2f}s")
         raise ValueError("Column mismatch between current orders and new orders. Please check the logs for details.")

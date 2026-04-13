@@ -174,8 +174,9 @@ def cleanup_data(df: pd.DataFrame, required_cols: set) -> pd.DataFrame:
         cleaned_df["segment"] = cleaned_df["segment"].fillna("UNKNOWN")
 
     # Convert numeric columns to appropriate types, coercing errors to NaN
-    for col in ["quantity", "unit_price"]:
-        cleaned_df[col] = pd.to_numeric(cleaned_df[col], errors="coerce")
+    for col in ["quantity", "unit_price", "revenue"]:
+        if col in cleaned_df.columns:
+            cleaned_df[col] = pd.to_numeric(cleaned_df[col], errors="coerce")
 
     # After coercion, remove rows with NaN in critical numeric columns
     # Log the number of rows removed due to non-numeric values in quantity or unit_price
@@ -267,6 +268,7 @@ def add_advanced_metrics(grouped_df: pd.DataFrame) -> pd.DataFrame:
     logger.info(f"Starting add_advanced_metrics with {len(grouped_df)} rows")
     
     df = grouped_df.copy()
+    df["total_revenue"] = pd.to_numeric(df["total_revenue"], errors="coerce")  # Ensure numeric type
     df=df.sort_values(by=["segment", "order_month"])  # Ensure correct order for cumulative and rolling calculations
     df["cumulative_revenue"] = df.groupby("segment")["total_revenue"].cumsum()
     df["rolling_avg_revenue"] = df.groupby("segment")["total_revenue"].transform(lambda x: x.rolling(window=3, min_periods=1).mean())
