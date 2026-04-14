@@ -30,7 +30,7 @@ output_file = result_dir / "revenue_summary.csv"
 
 customers_cols = {"customer_id", "segment"}
 orders_cols = {"order_id", "customer_id", "order_date", "quantity", "unit_price"}
-joined_cols = {"order_id", "customer_id", "order_date", "quantity", "unit_price", "segment", "ingestion_date", "ingestion_seq", "index", "segment", "revenue", "order_month"}
+joined_cols = {"order_id", "customer_id", "order_date", "quantity", "unit_price", "segment", "ingestion_date", "ingestion_seq", "index", "revenue", "order_month"}
 
 # Configure logging
 log_file = base_dir / "pipeline.log"
@@ -79,6 +79,7 @@ def check_preconditions(pipeline_start: float) -> None:
         logger.error(f"check_preconditions failed in {end_time - start_time:.2f}s: Customers metadata is missing")
         pipeline_end = time.time()
         logger.info(f"Pipeline completed in {pipeline_end - pipeline_start:.2f}s")
+        logger.info("=" * 60)
         raise FileNotFoundError(
             f"Customers metadata is missing. Please provide the customers.csv file in either {input_cusomers} or {customers_to_process}."
         )
@@ -87,24 +88,31 @@ def check_preconditions(pipeline_start: float) -> None:
     if not any(to_process_dir.glob("orders-????-??-??-????.csv")):
         end_time = time.time()
         logger.info(f"check_preconditions completed in {end_time - start_time:.2f}s: No new orders to process")
+        pipeline_end = time.time()
+        logger.info(f"Pipeline completed in {pipeline_end - pipeline_start:.2f}s")
+        logger.info("=" * 60)
         print("No new orders to process. Exiting.")
         exit(0)
 
     # Check immutable raw data consistency
-    raw_data_files = [f for f in input_dir.glob("**/orders-????-??-??-????.csv") if len(f.relative_to(input_dir).parts) == 4]
+    raw_data_files_exist = [f for f in input_dir.glob("**/orders-????-??-??-????.csv") if len(f.relative_to(input_dir).parts) == 4]
     intermediate_result_exists = current_orders.exists()
 
-    if not raw_data_files and intermediate_result_exists:
+    if not raw_data_files_exist and intermediate_result_exists:
         logger.warning(
             "Immutable raw data is missing, but intermediate result exists. It is recommended to restore the raw data from backup."
         )
-    elif raw_data_files and not intermediate_result_exists:
+    elif raw_data_files_exist and not intermediate_result_exists:
         end_time = time.time()
-        logger.error(f"check_preconditions failed in {end_time - start_time:.2f}s: Intermediate result is missing while immutable raw data exists. It is recommended to move the immutable raw data to the data/input/to_process folder and run the script again to restore the intermediate result.")
+        logger.error(f"check_preconditions failed in {end_time - start_time:.2f}s:\
+                      Intermediate result is missing while immutable raw data exists.\
+                      It is recommended to move the immutable raw data to the data/input/to_process folder and run the script again to restore the intermediate result.")
         pipeline_end = time.time()
         logger.info(f"Pipeline completed in {pipeline_end - pipeline_start:.2f}s")
+        logger.info("=" * 60)
         raise FileNotFoundError(
-            "Intermediate result is missing while immutable raw data exists. It is recommended to move the immutable raw data to the data/input/to_process folder and run the script again to restore the intermediate result."
+            "Intermediate result is missing while immutable raw data exists.\
+             It is recommended to move the immutable raw data to the data/input/to_process folder and run the script again to restore the intermediate result."
         )
     
     end_time = time.time()
