@@ -161,24 +161,7 @@ def main() -> None:
         os.replace(temp_customers_path, input_cusomers)
         os.remove(customers_to_process)  # remove the updates file after processing
 
-    # Step 4: Load the current orders data and validate format
-    # If the intermediate result doesn't exist (this is the first run), create an empty DataFrame
-    # with the expected columns (joined_cols) to be used in the next steps
-    logger.info("Step 4: Load the current orders data and validate format")
-    if current_orders.exists():
-        current_orders_df = load_data(current_orders)
-        validate_format(current_orders_df, joined_cols)
-    else:
-        current_orders_df = pd.DataFrame(columns=list(joined_cols))
-
-    # Normalize dtypes for the current orders data
-    current_orders_df = cleanup_data(current_orders_df, orders_cols)
-
-    # Step 5: Update customers information in the current orders if needed
-    logger.info("Step 5: Update customers information in the current orders")
-    current_orders_df.update(customers_df.set_index("customer_id")["segment"])
-
-    # Step 6: Load the new orders:
+    # Step 4: Load the new orders:
     # - the new orders are located in the to_process_dir folder
     # - these are files with the following name pattern: "orders-<YYYY>-<MM>-<DD>-<NNNN>.csv", where
     #   - <YYYY> is the 4-digit year
@@ -191,41 +174,54 @@ def main() -> None:
     #   we keep the last occurrence assuming it's the most recent update)
     # - all the files should be concatenated into a single DataFrame orders_to_process_df
     # - if there are no new orders files, skip to the next step
-    logger.info("Step 6: Load the new orders from to_process directory")
-    orders_to_process_df = pd.DataFrame()
+    logger.info("Step 4: Load the new orders from to_process directory")
+    orders_df = pd.DataFrame()
     # only files with zero-padded year/month/day/sequence match; lexical sort orders them correctly
     for file in sorted(to_process_dir.glob("orders-????-??-??-????.csv")):
         new_orders_df = load_and_enrich_metadata(file)
         validate_format(new_orders_df, orders_cols)
-        orders_to_process_df = pd.concat([orders_to_process_df, new_orders_df], ignore_index=True)
-    if orders_to_process_df.empty:
-        pipeline_end = time.time()
-        logger.info(f"pipeline completed in {pipeline_end - pipeline_start:.2f}s: No new orders to process. Exiting.")
-        exit(0)
+        orders_df = pd.concat([orders_df, new_orders_df], ignore_index=True)
 
-    # Step 7: Process and enrich the new orders:
+    # Step 5: Process and enrich the new orders:
     # - left join the new orders with customers_df on customer_id
     # - cleanup the joined DataFrame by running the cleanup_data function
     # - add calculated metrics to the cleaned DataFrame by running the add_calculated_metrics function
     # - if there are no new orders, skip to the next step
-    logger.info("Step 7: Process and enrich the new orders")
-    orders_to_process_df = orders_to_process_df.merge(customers_df, on="customer_id", how="left", validate="many_to_one")
-    orders_to_process_df = cleanup_data(orders_to_process_df, orders_cols)
-    orders_to_process_df = add_calculated_metrics(orders_to_process_df)
+    logger.info("Step 5: Process and enrich the new orders")
+    orders_df = orders_df.merge(customers_df, on="customer_id", how="left", validate="many_to_one")
+    orders_df = cleanup_data(orders_df, orders_cols)
+    orders_df = add_calculated_metrics(orders_df)
     
-    # Step 8: Update the current orders data:
-    # - concatenate the current orders with the processed new orders
-    # - if there are duplicate order_id (no matter if they have the same or different data), keep the last occurrence (assuming it's the most recent update)
-    # - save the updated current orders data to a temporary file and then move it to the original location (to avoid issues if the file is open in Excel or similar)
-    logger.info("Step 8: Update the current orders data")
-    if set(current_orders_df.columns) != set(orders_to_process_df.columns): # can only concatenate if columns match, otherwise log an error and raise an exception
-        logger.error(f"Column mismatch between current orders and new orders. Current orders columns: {current_orders_df.columns}, New orders columns: {orders_to_process_df.columns}")
-        pipeline_end = time.time()
-        logger.info(f"Pipeline completed in {pipeline_end - pipeline_start:.2f}s")
-        raise ValueError("Column mismatch between current orders and new orders. Please check the logs for details.")
-    orders_df = pd.concat([current_orders_df, orders_to_process_df], ignore_index=True)
-    orders_df = orders_df.sort_values(by=["order_id", "ingestion_date", "ingestion_seq", "index"], ascending=[True, True, True, True])  # sort by order_id and ingestion_date to keep the last occurrence in case of duplicates
-    orders_df = orders_df.drop_duplicates(subset=["order_id"], keep="last")
+    # Step 6: Load the current orders data and validate format
+    logger.info("Step 6: Load the current orders data and validate format")
+    if current_orders.exists():
+        current_orders_df = load_data(current_orders) # Current orders already have metadata (ingestion date, etc.), so no need to invoke load_and_enrich_metadata()
+        validate_format(current_orders_df, joined_cols)
+
+        # Normalize dtypes for the current orders data
+        current_orders_df = cleanup_data(current_orders_df, orders_cols)
+
+        # Step 7: Update customers information in the current orders if needed
+        logger.info("Step 7: Update customers information in the current orders")
+        current_orders_df.update(customers_df.set_index("customer_id")["segment"])
+
+        # Step 8: Update the current orders data:
+        # - concatenate the current orders with the processed new orders
+        # - if there are duplicate order_id (no matter if they have the same or different data), keep the last occurrence (assuming it's the most recent update)
+        logger.info("Step 8: Update the current orders data")
+        if set(current_orders_df.columns) != set(orders_df.columns): # can only concatenate if columns match, otherwise log an error and raise an exception
+            logger.error(f"Column mismatch between current orders and new orders. Current orders columns: {current_orders_df.columns}, New orders columns: {orders_df.columns}")
+            pipeline_end = time.time()
+            logger.info(f"Pipeline completed in {pipeline_end - pipeline_start:.2f}s")
+            raise ValueError("Column mismatch between current orders and new orders. Please check the logs for details.")
+        orders_df = pd.concat([current_orders_df, orders_df], ignore_index=True)
+        orders_df = orders_df.sort_values(by=["order_id", "ingestion_date", "ingestion_seq", "index"], ascending=[True, True, True, True])  # sort by order_id and ingestion_date to keep the last occurrence in case of duplicates
+        orders_df = orders_df.drop_duplicates(subset=["order_id"], keep="last")
+    
+    # Step 8b: Save the intermediate result unconditionally
+    # This ensures that the source of truth (enriched_raw_data.csv) is always updated
+    # whether this is the first run or a subsequent run
+    logger.info("Step 8b: Save the intermediate result to enriched_raw_data.csv")
     temp_orders_path = current_intermediate_dir / "enriched_raw_data_temp.csv"
     save_summary(orders_df, temp_orders_path)
     os.replace(temp_orders_path, current_orders)

@@ -320,9 +320,10 @@ cleaned_df = cleaned_df.drop_duplicates(subset=["order_id"], keep="last")
    ```
    в `DataFrame` 
    ```
-   current_customers_df 
+   customers_df 
    ```
-   `DataFrame` с метаданными клиентов нам будет нужен в любом случае, для приведения формата новых данных к промежуточным результатам. 
+   `DataFrame` с метаданными клиентов нам будет нужен в любом случае, для приведения формата новых данных к промежуточным результатам.
+   Создадим его пустым в самом начале, так что `customers_df`, после обработки метаданных кастомеров, всегда будет содержать наиболее актуальные значения.
 3. **Если есть обновленные метаданные клиентов** в файле
    ```
    data/input/to_process/customers.csv
@@ -335,7 +336,7 @@ cleaned_df = cleaned_df.drop_duplicates(subset=["order_id"], keep="last")
      ```
      customers_to_process_df
      ```
-   - Конкатенируем `current_customers_df` и `customers_to_process_df` в `customers_df`
+   - Конкатенируем `customers_df` с `current_customers_df`
    - Если данные дублируются - оставляем последнюю запись, даже если раньше у клиента был сегмент, а теперь - не стало.
    - Сохраняем обновленные метаданные клиентов в
      ```
@@ -353,19 +354,7 @@ cleaned_df = cleaned_df.drop_duplicates(subset=["order_id"], keep="last")
      ```
      data/input/to_process/customers.csv 
      ```
-4. **Считываем промежуточные результаты** из файла 
-   ```
-   data/current_intermediate/enriched_raw_data.csv 
-   ```
-   в `DataFrame` 
-   ```
-   current_orders_df
-   ```
-5. **Обновляем данные о клиентах**, если нужно
-   ```
-   current_orders_df.update(customers_df)
-   ```
-6. **Считываем загруженные новые данные** - все файлы из папки 
+4. **Считываем загруженные новые данные** - все файлы из папки 
    ```
    /data/input/to_process 
    ```
@@ -373,13 +362,26 @@ cleaned_df = cleaned_df.drop_duplicates(subset=["order_id"], keep="last")
    ```
    orders_to_process_df
    ```
-   Если файлов с новыми данными несколько - читаем в цикле и конкатенируем. 
-7. **Обрабатываем и обогащаем** `orders_to_process_df` 
-   - Джойним с `customers_df` (или если его нет - с `current_customers_df`) 
+   Если файлов с новыми данными несколько - читаем в цикле и конкатенируем.
+   В этот момент мы точно знаем, что новые данные есть, иначе не прошли бы `pre_conditions()`.
+5. **Обрабатываем и обогащаем** `orders_to_process_df` 
+   - Джойним с `customers_df`
    - Очищаем данные 
    - Обогащаем их метриками
      - `revenue`
      - `order_month` 
+6. **Считываем промежуточные результаты** из файла 
+   ```
+   data/current_intermediate/enriched_raw_data.csv 
+   ```
+   в `DataFrame` 
+   ```
+   current_orders_df
+   ```
+7. **Обновляем данные о клиентах**, если нужно
+   ```
+   current_orders_df.update(customers_df)
+   ```
 8. **Конкатенируем** `current_orders_df` и `orders_to_process_df` в `concatenated_orders_df` 
    - **Очищаем** `concatenated_orders_df` в `cleaned_orders_df` и в случае одинаковых `order_id` - оставляем только последнюю запись.
    - **Обновляем** файл с промежуточными результатами
