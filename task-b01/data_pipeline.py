@@ -3,6 +3,7 @@ from pathlib import Path
 import os
 import logging
 import time
+from enum import Enum
 from data_utils import (
     load_data,
     load_and_enrich_metadata,
@@ -23,7 +24,7 @@ to_process_dir = input_dir / "to_process"
 current_intermediate_dir = input_dir / "current_intermediate"
 result_dir = data_dir / "result"
 
-input_cusomers = input_dir / "customers.csv"
+input_customers = input_dir / "customers.csv"
 customers_to_process = to_process_dir / "customers.csv"
 current_orders = current_intermediate_dir / "enriched_raw_data.csv"
 output_file = result_dir / "revenue_summary.csv"
@@ -42,6 +43,28 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# Setting up Enum for various constants, returned by check_preconditions()
+class PipelineMode(Enum):
+    NO_CUSTOMERS_METADATA_UPDATE = "no_customers_metadata_update"
+    CUSTOMERS_METADATA_UPDATE_ONLY = "customers_only"
+    FIRST_RUN = "first_run"
+    NORMAL_RUN = "normal_run"
+
+
+# Service function to log starting the pipeline
+def pipeline_start_log() -> float:
+    start_time = time.time()
+    logger.info("=" * 60)
+    logger.info(f"Starting pipeline run at {time.strftime('%Y-%m-%d %H:%M:%S')}")
+    logger.info("=" * 60)
+    return start_time
+
+
+# Service function to log ending the pipeline
+def pipeline_end_log(pipeline_start: float) -> None:
+    pipeline_end = time.time()
+    logger.info(f"Pipeline run completed in {pipeline_end - pipeline_start:.2f}s")
+    logger.info("=" * 60)
 
 # Below function checks the pre-conditions before running the main data analytic pipeline:
 # - General goal for the checks is to provide the normal start of the script (necessary files
@@ -69,30 +92,37 @@ logger = logging.getLogger(__name__)
 #      If it doesn't exist - raise an exception with a message that the intermediate result is missing.
 #      It is recommended to move the immutable raw data to folder data/input/to_process and run the script again.
 #      to restore the intermediate result.
-def check_preconditions(pipeline_start: float) -> None:
+def check_preconditions(pipeline_start: float) -> tuple[PipelineMode]:
     start_time = time.time()
     logger.info(f"Starting check_preconditions")
+
+    pre_conditions = []
     
+    input_customers_exists = input_customers.exists()
+    customers_to_process_exists = customers_to_process.exists()
+
     # Check if customers metadata exist
-    if not input_cusomers.exists() and not customers_to_process.exists():
+    if not input_customers_exists and not customers_to_process_exists:
         end_time = time.time()
         logger.error(f"check_preconditions failed in {end_time - start_time:.2f}s: Customers metadata is missing")
-        pipeline_end = time.time()
-        logger.info(f"Pipeline completed in {pipeline_end - pipeline_start:.2f}s")
-        logger.info("=" * 60)
+        pipeline_end_log(pipeline_start)
         raise FileNotFoundError(
-            f"Customers metadata is missing. Please provide the customers.csv file in either {input_cusomers} or {customers_to_process}."
+            f"Customers metadata is missing. Please provide the customers.csv file in either {input_customers} or {customers_to_process}."
         )
 
-    # Check if there are new orders to process
-    if not any(to_process_dir.glob("orders-????-??-??-????.csv")):
+    orders_to_process_exist = any(to_process_dir.glob("orders-????-??-??-????.csv"))
+
+    # Check if there are new orders or customers metadata updates to process
+    if not orders_to_process_exist and not customers_to_process_exists: # if there are no new orders and no customers metadata updates, then we can exit without processing
         end_time = time.time()
-        logger.info(f"check_preconditions completed in {end_time - start_time:.2f}s: No new orders to process")
-        pipeline_end = time.time()
-        logger.info(f"Pipeline completed in {pipeline_end - pipeline_start:.2f}s")
-        logger.info("=" * 60)
-        print("No new orders to process. Exiting.")
+        logger.info(f"check_preconditions completed in {end_time - start_time:.2f}s: No new orders to process and no customers metadata updates")
+        pipeline_end_log(pipeline_start)
+        print("No new orders to process and no customers metadata updates. Exiting.")
         exit(0)
+    elif not orders_to_process_exist and customers_to_process_exists: # if there are no new orders but there are customers metadata updates, then we can process only the customers metadata update without the orders processing
+        end_time = time.time()
+        logger.info(f"check_preconditions completed in {end_time - start_time:.2f}s: No new orders to process - only customers metadata updates exist")
+        pre_conditions.append(PipelineMode.CUSTOMERS_METADATA_UPDATE_ONLY)
 
     # Check immutable raw data consistency
     raw_data_files_exist = [f for f in input_dir.glob("**/orders-????-??-??-????.csv") if len(f.relative_to(input_dir).parts) == 4]
@@ -107,9 +137,7 @@ def check_preconditions(pipeline_start: float) -> None:
         logger.error(f"check_preconditions failed in {end_time - start_time:.2f}s:\
                       Intermediate result is missing while immutable raw data exists.\
                       It is recommended to move the immutable raw data to the data/input/to_process folder and run the script again to restore the intermediate result.")
-        pipeline_end = time.time()
-        logger.info(f"Pipeline completed in {pipeline_end - pipeline_start:.2f}s")
-        logger.info("=" * 60)
+        pipeline_end_log(pipeline_start)
         raise FileNotFoundError(
             "Intermediate result is missing while immutable raw data exists.\
              It is recommended to move the immutable raw data to the data/input/to_process folder and run the script again to restore the intermediate result."
@@ -133,8 +161,8 @@ def main() -> None:
     logger.info("Step 2: Load customers data and validate format")
     #customers_df = pd.DataFrame(columns=list(customers_cols))  # default empty DataFrame with expected columns
     customers_df = pd.DataFrame()
-    if input_cusomers.exists():
-        customers_df = load_data(input_cusomers)
+    if input_customers.exists():
+        customers_df = load_data(input_customers)
         validate_format(customers_df, customers_cols)
         if customers_df["customer_id"].duplicated().any(): # duplication may only happen if immutable customers metadata was updated manually.
             logger.warning("Duplicate customer_id found in customers data. Keeping the last occurrence and removing duplicates.")
@@ -158,7 +186,7 @@ def main() -> None:
         # (to avoid issues if the file is open in Excel or similar)
         temp_customers_path = input_dir / "customers_temp.csv"
         save_summary(customers_df, temp_customers_path)
-        os.replace(temp_customers_path, input_cusomers)
+        os.replace(temp_customers_path, input_customers)
         os.remove(customers_to_process)  # remove the updates file after processing
 
     # Step 4: Load the new orders:
